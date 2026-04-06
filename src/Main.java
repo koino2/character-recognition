@@ -47,23 +47,48 @@ public class Main {
         window.setResizable(false);
 
         Backend backend = new Backend();
-        File zeroFolder = new File("src/training/zero");
-        File[] zeros = zeroFolder.listFiles();
+        File trainingFolder = new File("src/training");
+        File[] itemFolders = trainingFolder.listFiles();
 
-        backend.trainingSamples = new float[zeros.length][pixelCanvas.defaultRes.width*pixelCanvas.defaultRes.height];
-        backend.expectedOutputs = new float[zeros.length][1];
-        for (int i = 0; i < zeros.length; i++) {
-            BufferedImage img = ImageIO.read(zeros[i]);
+        for (int item = 0; item < itemFolders.length; item++) {
+            File itemFolder = new File("src/training/"+getNumberName(item));
+            File[] examples = itemFolder.listFiles();
 
-            for (int y = 0; y < img.getHeight(); y++) {
-                for (int x = 0; x < img.getWidth(); x++) {
-                    pixelCanvas.pixels[y][x] = new Color(img.getRGB(x,y));
+            backend.trainingSamples = new float[examples.length][pixelCanvas.defaultRes.width*pixelCanvas.defaultRes.height];
+            backend.expectedOutputs = new float[examples.length][10];
+            for (int i = 0; i < examples.length; i++) {
+                BufferedImage img = ImageIO.read(examples[i]);
+
+                for (int y = 0; y < img.getHeight(); y++) {
+                    for (int x = 0; x < img.getWidth(); x++) {
+                        pixelCanvas.pixels[y][x] = new Color(img.getRGB(x,y));
+                    }
                 }
-            }
 
-            backend.trainingSamples[i] = pixelCanvas.getPixels();
-            backend.expectedOutputs[i] = new float[0];
+                backend.trainingSamples[i] = pixelCanvas.getPixels();
+                float[] label = new float[10];
+                label[item] = 1f;
+
+                backend.expectedOutputs[i] = label;
+            }
+            backend.train();
         }
-        backend.train();
+
+    }
+
+    public static String getNumberName(int number){
+        switch (number) {
+            case 0: return "zero";
+            case 1: return "one";
+            case 2: return "two";
+            case 3: return "three";
+            case 4: return "four";
+            case 5: return "five";
+            case 6: return "six";
+            case 7: return "seven";
+            case 8: return "eight";
+            case 9: return "nine";
+        }
+        return null;
     }
 }
