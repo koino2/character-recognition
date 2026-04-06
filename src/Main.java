@@ -21,7 +21,10 @@ public class Main {
         window.setContentPane(mainPanel);
         mainPanel.setBackground(new Color(17, 18, 28));
 
+        Backend backend = new Backend();
+
         PixelCanvas pixelCanvas = new PixelCanvas(32,32);
+        pixelCanvas.backend = backend;
         pixelCanvas.scaleMultiplier = 15;
         pixelCanvas.setBackground(Color.BLACK);
         pixelCanvas.setSize(pixelCanvas.scaleMultiplier*pixelCanvas.canvasSize.width,
@@ -38,6 +41,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pixelCanvas.init();
+                backend.update(pixelCanvas);
                 pixelCanvas.repaint();
             }
         });
@@ -46,7 +50,6 @@ public class Main {
         window.setVisible(true);
         window.setResizable(false);
 
-        Backend backend = new Backend();
         File trainingFolder = new File("src/training");
         File[] itemFolders = trainingFolder.listFiles();
 

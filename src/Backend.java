@@ -1,6 +1,8 @@
 import ai.CytonAI;
 import ai.Network;
 
+import java.util.Arrays;
+
 public class Backend {
     public Network network;
     public int inputSize = 32*32;
@@ -21,5 +23,11 @@ public class Backend {
             network.inputLayer().setActivations(trainingSamples[i]);
             network.backpropagate(expectedOutputs[i], learningRate, true);
         }
+    }
+
+    public void update(PixelCanvas pc){
+        network.inputLayer().setActivations(pc.getPixels());
+        network.compute();
+        System.out.println(Arrays.toString(network.outputLayer().activations()));
     }
 }

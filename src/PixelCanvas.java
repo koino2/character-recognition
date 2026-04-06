@@ -8,6 +8,7 @@ public class PixelCanvas extends JPanel {
     public Dimension defaultRes = new Dimension(32,32);
     public Color[][] pixels = new Color[defaultRes.height][defaultRes.width];
     public int scaleMultiplier;
+    public Backend backend;
 
     public void init(){
         for (int y = 0; y < pixels.length; y++) {
@@ -29,6 +30,8 @@ public class PixelCanvas extends JPanel {
                     pixels[y][x] = Color.WHITE;
                     repaint();
                 }
+
+                backend.update(PixelCanvas.this);
             }
 
             @Override
@@ -67,7 +70,7 @@ public class PixelCanvas extends JPanel {
 
         for (int y = 0; y < canvasSize.height; y++) {
             for (int x = 0; x < canvasSize.width; x++) {
-                pixelsFloat[(y*canvasSize.width)+x] = pixels[y][x].getRed();
+                pixelsFloat[(y*canvasSize.width)+x] = pixels[y][x].getRed() / 255f;
             }
         }
 
