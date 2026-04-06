@@ -43,6 +43,5 @@ public class Main {
         window.setResizable(false);
 
         Backend backend = new Backend();
-        backend.
     }
 }
