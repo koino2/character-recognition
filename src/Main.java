@@ -1,10 +1,14 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         JFrame window = new JFrame();
         window.setTitle("Handwritten character recognition");
         window.setSize(new Dimension(1200,800));
@@ -43,5 +47,23 @@ public class Main {
         window.setResizable(false);
 
         Backend backend = new Backend();
+        File zeroFolder = new File("src/training/zero");
+        File[] zeros = zeroFolder.listFiles();
+
+        backend.trainingSamples = new float[zeros.length][pixelCanvas.defaultRes.width*pixelCanvas.defaultRes.height];
+        backend.expectedOutputs = new float[zeros.length][1];
+        for (int i = 0; i < zeros.length; i++) {
+            BufferedImage img = ImageIO.read(zeros[i]);
+
+            for (int y = 0; y < img.getHeight(); y++) {
+                for (int x = 0; x < img.getWidth(); x++) {
+                    pixelCanvas.pixels[y][x] = new Color(img.getRGB(x,y));
+                }
+            }
+
+            backend.trainingSamples[i] = pixelCanvas.getPixels();
+            backend.expectedOutputs[i] = new float[0];
+        }
+        backend.train();
     }
 }
