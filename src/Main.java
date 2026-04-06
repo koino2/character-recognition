@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         JFrame window = new JFrame();
         window.setTitle("Handwritten character recognition");
-        window.setSize(new Dimension(1200,800));
+        window.setSize(new Dimension(600,600));
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
@@ -54,7 +54,7 @@ public class Main {
         File[] itemFolders = trainingFolder.listFiles();
 
         System.out.println("Starting training...");
-        for (int epochs = 0; epochs < 2000; epochs++) {
+        for (int epochs = 0; epochs < 512; epochs++) {
             for (int item = 0; item < itemFolders.length; item++) {
                 File itemFolder = new File("src/training/"+getNumberName(item));
                 File[] examples = itemFolder.listFiles();
