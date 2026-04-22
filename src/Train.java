@@ -1,12 +1,13 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class Train {
-    public static void main(String[] args) throws IOException {
 
+    public static String path = "src/weights.txt";
+
+    public static void main(String[] args) throws IOException {
         Backend backend = new Backend();
         PixelCanvas pixelCanvas = new PixelCanvas(32,32);
         pixelCanvas.backend = backend;
@@ -48,7 +49,19 @@ public class Train {
         }
 
         System.out.printf("TRAINING DONE");
+
+        float[] weights = backend.getWeights();
+
+        try (DataOutputStream out = new DataOutputStream(
+                new BufferedOutputStream(new FileOutputStream(path))
+        )) {
+
+            for (int i = 0; i < weights.length; i++) {
+                out.writeFloat(weights[i]);
+            }
+        }
     }
+    
     public static String getNumberName(int number){
         switch (number) {
             case 0: return "zero";

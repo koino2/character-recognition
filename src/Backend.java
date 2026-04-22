@@ -1,7 +1,9 @@
 import ai.CytonAI;
 import ai.Network;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Backend {
     public Network network;
@@ -31,5 +33,21 @@ public class Backend {
         network.compute();
         System.out.println(Arrays.toString(network.outputLayer().activations()));
         System.out.println(network.outputLayer().getBrightestNeuronIndex());
+    }
+
+    public float[] getWeights(){
+        List<Float> weights = new ArrayList<>();
+        for (int i = 1; i < network.layers.length; i++) {
+            for (int j = 0; j < network.layers[i].neurons.length; j++) {
+                for (int k = 0; k < network.layers[i].neurons[j].incomingWeights.length; k++) {
+                    weights.add(network.layers[i].neurons[j].incomingWeights[k].weight);
+                }
+            }
+        }
+        float[] result = new float[weights.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = weights.get(i);
+        }
+        return result;
     }
 }
