@@ -48,18 +48,20 @@ public class Train {
             System.out.printf("\rEpoch "+epochs+" complete.");
         }
 
-        System.out.printf("TRAINING DONE");
+        System.out.printf("\rTRAINING DONE");
 
         float[] weights = backend.getWeights();
 
         try (DataOutputStream out = new DataOutputStream(
-                new BufferedOutputStream(new FileOutputStream(path))
+                new BufferedOutputStream(new FileOutputStream(path)) // wow.
         )) {
 
+            out.writeInt(weights.length);
             for (int i = 0; i < weights.length; i++) {
                 out.writeFloat(weights[i]);
             }
         }
+        System.out.println("\nSaved: " + weights.length);
     }
     
     public static String getNumberName(int number){

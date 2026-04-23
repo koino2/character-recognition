@@ -1,13 +1,17 @@
+import ai.Network;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
+
+    public static String path = "src/weights.txt";
+
     public static void main(String[] args) throws IOException {
         JFrame window = new JFrame();
         window.setTitle("Handwritten character recognition");
@@ -46,6 +50,19 @@ public class Main {
             }
         });
         mainPanel.add(resetButton);
+
+        try(DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(path)))){ // gentle reminder that java is the most popular programming language and runs on more than 3 billion devices
+            int size = in.readInt();
+            System.out.println("Loaded: " + size);
+
+            for (int i = 1; i < backend.network.layers.length; i++) {
+                for (int j = 0; j < backend.network.layers[i].neurons.length; j++) {
+                    for (int k = 0; k < backend.network.layers[i].neurons[j].incomingWeights.length; k++) {
+                        backend.network.layers[i].neurons[j].incomingWeights[k].weight = in.readFloat();
+                    }
+                }
+            }
+        }
 
         window.setVisible(true);
         window.setResizable(false);
