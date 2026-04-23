@@ -12,6 +12,7 @@ import java.io.*;
 public class Main {
 
     public static String path = "weights.txt";
+    public static String savePath = "src/training/";
 
     public static void main(String[] args) throws IOException {
         JFrame window = new JFrame();
@@ -38,7 +39,7 @@ public class Main {
         mainPanel.add(pixelCanvas);
 
         JButton resetButton = new JButton();
-        resetButton.setLocation((int) pixelCanvas.getLocation().getX() + 20, pixelCanvas.getHeight()+50);
+        resetButton.setLocation((int) pixelCanvas.getLocation().getX() + 20, pixelCanvas.getHeight()+20);
         resetButton.setSize(100,30);
         resetButton.setText("Reset");
         resetButton.setVisible(true);
@@ -51,6 +52,32 @@ public class Main {
             }
         });
         mainPanel.add(resetButton);
+
+        JSpinner selector = new JSpinner();
+        selector.setLocation(150, pixelCanvas.getHeight()+20);
+        selector.setSize(50,30);
+        selector.setVisible(true);
+        selector.setFont(new Font("Segoe UI Bold", Font.BOLD, 20));
+        mainPanel.add(selector);
+
+        JButton addSample = new JButton("Add Sample");
+        addSample.setLocation(225, pixelCanvas.getHeight()+20);
+        addSample.setSize(100,30);
+        addSample.setVisible(true);
+        addSample.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ((Integer) selector.getValue() > 9 || (Integer) selector.getValue() < 0){
+                    System.out.println("Invalid input!");
+                    return;
+                }
+                pixelCanvas.saveImage(savePath+Train.getNumberName((Integer) selector.getValue()));
+                pixelCanvas.init();
+                backend.update(pixelCanvas);
+                pixelCanvas.repaint();
+            }
+        });
+        mainPanel.add(addSample);
 
         OutputPanel outputPanel = new OutputPanel(backend);
         outputPanel.setLayout(null);

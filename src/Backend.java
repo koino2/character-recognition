@@ -31,8 +31,6 @@ public class Backend {
     public void update(PixelCanvas pc){
         network.inputLayer().setActivations(pc.getPixels());
         network.compute();
-        System.out.println(Arrays.toString(network.outputLayer().activations()));
-        System.out.println(network.outputLayer().getBrightestNeuronIndex());
     }
 
     public float[] getWeights(){
