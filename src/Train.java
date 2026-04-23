@@ -16,13 +16,13 @@ public class Train {
         pixelCanvas.setSize(pixelCanvas.scaleMultiplier*pixelCanvas.canvasSize.width,
                 pixelCanvas.scaleMultiplier*pixelCanvas.canvasSize.height);
         pixelCanvas.setLocation(0,0);
-        File trainingFolder = new File("src/training");
+        File trainingFolder = new File("training");
         File[] itemFolders = trainingFolder.listFiles();
 
         System.out.println("Starting training...");
-        for (int epochs = 0; epochs < 512; epochs++) {
+        for (int epochs = 0; epochs < 128; epochs++) {
             for (int item = 0; item < itemFolders.length; item++) {
-                File itemFolder = new File("src/training/"+getNumberName(item));
+                File itemFolder = new File("training/"+getNumberName(item));
                 File[] examples = itemFolder.listFiles();
 
                 backend.trainingSamples = new float[examples.length][pixelCanvas.defaultRes.width*pixelCanvas.defaultRes.height];
@@ -48,7 +48,7 @@ public class Train {
             System.out.printf("\rEpoch "+epochs+" complete.");
         }
 
-        System.out.printf("\rTRAINING DONE");
+        System.out.println("\nTRAINING DONE");
 
         float[] weights = backend.getWeights();
 

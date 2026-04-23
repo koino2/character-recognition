@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="character-recognition:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/character_recognition_jar</output-path>
+    <root id="archive" name="Main.jar">
+      <element id="module-output" name="character-recognition" />
+    </root>
+  </artifact>
+</component>

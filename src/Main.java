@@ -12,7 +12,7 @@ import java.io.*;
 public class Main {
 
     public static String path = "weights.txt";
-    public static String savePath = "src/training/";
+    public static String savePath = "training/";
 
     public static void main(String[] args) throws IOException {
         JFrame window = new JFrame();

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="train">
+    <output-path>$PROJECT_DIR$/out/artifacts/train</output-path>
+    <root id="archive" name="Train.jar">
+      <element id="module-output" name="character-recognition" />
+    </root>
+  </artifact>
+</component>
