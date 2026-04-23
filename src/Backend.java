@@ -14,7 +14,7 @@ public class Backend {
     public float[][] trainingSamples;
     public float[][] expectedOutputs;
 
-    public int[] networkSizes = new int[]{inputSize, 256, outputSize};
+    public int[] networkSizes = new int[]{inputSize, 64, outputSize};
     public Backend(){
         network = CytonAI.networkBuilder(networkSizes, -1f, 1f);
         network.compute();

@@ -1,3 +1,4 @@
+import ai.CytonAI;
 import ai.Network;
 
 import javax.imageio.ImageIO;
@@ -15,7 +16,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         JFrame window = new JFrame();
         window.setTitle("Handwritten character recognition");
-        window.setSize(new Dimension(800,600));
+        window.setSize(new Dimension(750,600));
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
@@ -51,6 +52,14 @@ public class Main {
         });
         mainPanel.add(resetButton);
 
+        OutputPanel outputPanel = new OutputPanel(backend);
+        outputPanel.setLayout(null);
+        outputPanel.setSize(240,540);
+        outputPanel.setLocation(490,10);
+        outputPanel.setBackground(new Color(17, 18, 28));
+        mainPanel.add(outputPanel);
+        new javax.swing.Timer(16, e -> outputPanel.repaint()).start();
+
         try(DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(path)))){ // gentle reminder that java is the most popular programming language and runs on more than 3 billion devices
             int size = in.readInt();
             System.out.println("Loaded: " + size);
@@ -67,5 +76,69 @@ public class Main {
         window.setVisible(true);
         window.setResizable(false);
 
+    }
+
+    static class OutputPanel extends JPanel{
+        public static Backend backend;
+
+        public OutputPanel(Backend backend){ OutputPanel.backend = backend;}
+
+        public static float[] sigmoid(float[] input){
+            float[] output = new float[input.length];
+            for (int i = 0; i < input.length; i++) {
+                float x = input[i];
+                if (x >= 0){
+                    double z = Math.exp(-x);
+                    output[i] = (float)(1.0 / (1.0 + z));
+                } else{
+                    double z = Math.exp(x);
+                    output[i] = (float)(z / (1.0 + z));
+                }
+            }
+            return output;
+        }
+
+        public static String formatValue(float value) {
+            float output;
+            if (Math.abs(value) < 1e-6f) {
+                output = 0f;
+            }
+            return String.format("%.3f", value);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Segoe UI Light", Font.PLAIN, 30));
+            g.drawString("Model Output", 0, 30);
+
+            float[] outputs = sigmoid(backend.network.outputLayer().activations());
+
+            for (int i = 0; i < 10; i++) {
+
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("Segoe UI Light", Font.PLAIN, 25));
+                g.drawString(String.valueOf(i),0,(i*30)+70);
+                
+                g.setColor(new Color(80, 80, 80));
+                g.fillRect(30, (i*30)+50, 200,20);
+                g.setColor(new Color(96, 195, 90));
+                g.fillRect(30, (i*30)+50, (int) (outputs[i]*200),20);
+
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("Segoe UI Light", Font.PLAIN, 25));
+                g.drawString(formatValue(outputs[i]),50,(i*30)+70);
+            }
+
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Segoe UI Light", Font.PLAIN, 30));
+            g.drawString("Predicted: ", 0, 380);
+            g.setFont(new Font("Segoe UI Light", Font.PLAIN, 80));
+            g.drawString(String.valueOf(backend.network.outputLayer().getBrightestNeuronIndex()), 95, 460);
+            g.setFont(new Font("Segoe UI Light", Font.PLAIN, 30));
+            g.drawString("Confidence: "+ formatValue(outputs[backend.network.outputLayer().getBrightestNeuronIndex()]), 0, 490);
+        }
     }
 }
