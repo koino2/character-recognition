@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Train {
 
-    public static String path = "src/weights.txt";
+    public static String path = "weights.txt";
 
     public static void main(String[] args) throws IOException {
         Backend backend = new Backend();

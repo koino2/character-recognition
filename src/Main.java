@@ -10,7 +10,7 @@ import java.io.*;
 
 public class Main {
 
-    public static String path = "src/weights.txt";
+    public static String path = "weights.txt";
 
     public static void main(String[] args) throws IOException {
         JFrame window = new JFrame();
