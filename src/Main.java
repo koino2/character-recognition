@@ -31,7 +31,7 @@ public class Main {
 
         PixelCanvas pixelCanvas = new PixelCanvas(28,28);
         pixelCanvas.backend = backend;
-        pixelCanvas.scaleMultiplier = 15;
+        pixelCanvas.scaleMultiplier = 16;
         pixelCanvas.setBackground(Color.BLACK);
         pixelCanvas.setSize(pixelCanvas.scaleMultiplier*pixelCanvas.canvasSize.width,
                 pixelCanvas.scaleMultiplier*pixelCanvas.canvasSize.height);
