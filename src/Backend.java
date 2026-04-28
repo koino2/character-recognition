@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Backend {
     public Network network;
-    public int inputSize = 32*32;
+    public int inputSize = 28*28;
     public int outputSize = 10;
     public float learningRate = 0.0001f;
 

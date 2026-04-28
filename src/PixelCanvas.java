@@ -11,12 +11,12 @@ import java.time.format.DateTimeFormatter;
 
 public class PixelCanvas extends JPanel {
     public Dimension canvasSize;
-    public Dimension defaultRes = new Dimension(32,32);
+    public Dimension defaultRes = new Dimension(28,28);
     public Color[][] pixels = new Color[defaultRes.height][defaultRes.width];
     public int scaleMultiplier;
     public Backend backend;
 
-    public int brushSize = 2;
+    public float brushSize = 1.5f;
     public float brushStrength = 0.5f;
 
     public void saveImage (String path){
@@ -56,11 +56,11 @@ public class PixelCanvas extends JPanel {
                 int cx = e.getX() / scaleMultiplier;
                 int cy = e.getY() / scaleMultiplier;
 
-                for (int dy = -brushSize; dy <= brushSize; dy++) {
-                    for (int dx = -brushSize; dx <= brushSize; dx++) {
+                for (float dy = -brushSize; dy <= brushSize; dy++) {
+                    for (float dx = -brushSize; dx <= brushSize; dx++) {
 
-                        int x = cx + dx;
-                        int y = cy + dy;
+                        float x = cx + dx;
+                        float y = cy + dy;
 
                         if (x < 0 || y < 0 || x >= canvasSize.width || y >= canvasSize.height)
                             continue;
@@ -69,12 +69,12 @@ public class PixelCanvas extends JPanel {
 
                         if (dist <= brushSize) {
                             float falloff = 1.0f - (float)(dist / brushSize);
-                            float current = pixels[y][x].getRed() / 255f;
+                            float current = pixels[(int)y][(int)x].getRed() / 255f;
                             float newValue = current + brushStrength * falloff;
                             newValue = Math.min(1.0f, newValue);
 
                             int gray = (int)(newValue * 255);
-                            pixels[y][x] = new Color(gray, gray, gray);
+                            pixels[(int)y][(int)x] = new Color(gray, gray, gray);
                         }
                     }
                 }

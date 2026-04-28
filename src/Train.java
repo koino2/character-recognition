@@ -9,7 +9,7 @@ public class Train {
 
     public static void main(String[] args) throws IOException {
         Backend backend = new Backend();
-        PixelCanvas pixelCanvas = new PixelCanvas(32,32);
+        PixelCanvas pixelCanvas = new PixelCanvas(28, 28);
         pixelCanvas.backend = backend;
         pixelCanvas.scaleMultiplier = 15;
         pixelCanvas.setBackground(Color.BLACK);
