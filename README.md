@@ -28,7 +28,7 @@ If you want a better explanation than this, here are some good resources for you
 - [IBM's explanation of MLPs](https://www.youtube.com/watch?v=7YaqzpitBXw)  
 - [Sebastion Lague's video about neural network doodle-detection](https://www.youtube.com/watch?v=hfMk-kjRv4c)
 
-In this project, the network is having a structure of {28*28, 64, 10}.  
+In this project, the network has a structure of {28*28, 64, 10}.  
 This means that there is 
 - an input layer of 28*28=784 neurons (one for each pixel),
 - one hidden layer of 64 neurons,
