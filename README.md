@@ -42,3 +42,12 @@ The output neuron with the highest activation is chosen as the digit recognised.
 <p align="center">
 <img src="src/mlp.png" width="80%" height="80%">
 </p>
+
+## Project Structure
+Use ├──, └──, │  makes hierarchy obvious
+```
+character-recognition
+├──src
+    ├──ai
+    ├──examples
+```
