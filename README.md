@@ -44,10 +44,28 @@ The output neuron with the highest activation is chosen as the digit recognised.
 </p>
 
 ## Project Structure
-Use ├──, └──, │  makes hierarchy obvious
 ```
 character-recognition
-├──src
-    ├──ai
-    ├──examples
+├── 📂 src                          # Main code stuff
+│   ├── 📂 ai                       # Cyton AI folder
+│   ├── 📂 META-INF                 # build configuration bs
+│   ├── ☕ Backend                  # Backend/MLP class
+│   ├── ☕ Main                     # Main app
+│   ├── ☕ PixelCanvas              # Drawing Canvas module
+│   ├── ☕ Train                    # Training
+│   └── 🖼️ mlp.png                  # png for readme
+│
+├── 📂 training                     # contains folders one-nine in which there are 28x28 images of that number.
+│
+├── 📃 weights.txt                  # all the weights of the network (made by training)
+│
+├── 📂 releases
+│   ├── 🖼️ banner.png               # flavortown project banner
+│   ├── 🎦 instructions.pptx        # instructions ppt
+│   ├── 🎦 visuals.pptx             # powerpoint is peak graphic design
+│   ├── 🤐 SHIP.zip                 # first release
+│
+├── 📃 README.md                    # this
+│
+├── 📃 LICENSE                      # MIT licence
 ```
