@@ -18,7 +18,7 @@
 - They are trained first with the MNIST dataset - a collection of 60,000 handwritten digits.
 
 ### MLPs
-MLPs (Multilayer Perceptron) contain several layers, each layer has many neurons.  
+MLPs (Multilayer Perceptron) are simple neural networks that  contain several layers, each layer has many neurons.  
 Neurons are just things that do computation. Every neuron in a layer in connected to every neuron in the next layer.  
 These connections are called weights. When computing a neuron, the activations of all the previous neurons are multiplied with the corresponding weight and added up.  
 By changing the weights of the network precisely, we can 'train' the network.
@@ -63,10 +63,10 @@ character-recognition
 │   ├── 🖼️ banner.png               # flavortown project banner
 │   ├── 🎦 instructions.pptx        # instructions ppt
 │   ├── 🎦 visuals.pptx             # powerpoint is peak graphic design
-│   └── 🤐 SHIP.zip                 # first release
+│   ├── 🤐 SHIP.zip                 # first release
 │   └── 🤐 ship2.zip                # second ship release
 │
 ├── 📃 README.md                    # this
 │
-├── 📃 LICENSE                      # MIT licence
+└── 📃 LICENSE                      # MIT licence
 ```
