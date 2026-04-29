@@ -63,7 +63,7 @@ character-recognition
 │   ├── 🖼️ banner.png               # flavortown project banner
 │   ├── 🎦 instructions.pptx        # instructions ppt
 │   ├── 🎦 visuals.pptx             # powerpoint is peak graphic design
-│   ├── 🤐 SHIP.zip                 # first release
+│   └── 🤐 SHIP.zip                 # first release
 │
 ├── 📃 README.md                    # this
 │
