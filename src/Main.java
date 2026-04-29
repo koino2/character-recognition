@@ -68,7 +68,12 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if ((Integer) selector.getValue() > 9 || (Integer) selector.getValue() < 0){
-                    System.out.println("Invalid input!");
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Invalid Input!",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
                     return;
                 }
                 pixelCanvas.saveImage(savePath+Train.getNumberName((Integer) selector.getValue()));

@@ -10,7 +10,7 @@
 - Add the MNIST images into the working directory as PNGs from this repo: https://github.com/rasbt/mnist-pngs/tree/main and rename the folders inside from 1,2,3... to one, two, three,...
 - Run Train to create the training file
 - Run Main. (Make sure both have the same working directory)
-- To add your own training samples, draw them in the same style in a 28x28 png and save it to the corresponding folder inside src/training
+- To add your own training samples, draw them in the app and then select the number you have drawn with the spinner (to the right of the Reset button) and then press the button labeled "Add Sample".
 
 ## How it works
 - This uses trained MLPs to identify which number you have drawn.
@@ -64,6 +64,7 @@ character-recognition
 │   ├── 🎦 instructions.pptx        # instructions ppt
 │   ├── 🎦 visuals.pptx             # powerpoint is peak graphic design
 │   └── 🤐 SHIP.zip                 # first release
+│   └── 🤐 ship2.zip                # second ship release
 │
 ├── 📃 README.md                    # this
 │
